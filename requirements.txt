@@ -1,4 +1,4 @@
-# brew update && brew install gcc (this includes gfortran)
+# brew update && brew install gcc (this includes gfortran
 ipython[all]>=3.2.0
 pyzmq>=14.7.0
 Pillow>=2.9.0
