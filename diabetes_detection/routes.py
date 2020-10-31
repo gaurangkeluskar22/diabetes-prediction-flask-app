@@ -20,7 +20,7 @@ def detect():
         data=request.form
         X_test = json2Xtest(data)
         diabetes_chance = model.predict_proba(X_test)[0][1] * 100
-        predection_text='NULL'
+        
         #return jsonify({'diabetes_chance': diabetes_chance})
         return render_template('index.html',predection_text='Diabetes chance: {}'.format(diabetes_chance))
     except:
