@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <title>Diabetes mellitus prediction system</title>
+
+</head>
+
+<body>
+
+<script>
+   document.addEventListener("DOMContentLoaded", function(event) {
+    var predicted_ans='{{predection_text}}';
+    if(predicted_ans){
+    let res=document.getElementById('res');
+    res.innerHTML=predicted_ans; 
+    $("#myModal").modal();
+    }
+  });
+  
+</script>
+
+
+<!-- Modal -->
+<div class="modal fade mt-5" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <h5 id="res">Some text in the modal.</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+  <!---        form      -->
+
+  <div class="container">
+
+    <form class="form-horizontal mt-3" action="{{ url_for('detect') }}" method="POST">
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="age">Enter Your Age</label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" id="Age" placeholder="Enter Your Age" name="Age" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="Gender">Enter you Gender</label>
+        <div class="col-sm-6">
+          <select class="form-control" id="Gender" name="Gender" required>
+            <option value="0">Please Select Option</option>
+            <option value="1"> Male</option>
+            <option value="0"> Female </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="Polyuria">Do you urinate more than usual ? (Polyuria)</label>
+        <div class="col-sm-6">
+          <select class="form-control" id="Polyuria" name="Polyuria" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="Polydipsia">Does your throat dries ? (Polydipsia)</label>
+        <div class="col-sm-6">
+          <select class="form-control" id="Polydipsia" name="Polydipsia" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="SuddenWeightLoss">Sudden weight loss ?</label>
+        <div class="col-sm-6">
+          <select class="form-control" id="SuddenWeightLoss" name="SuddenWeightLoss" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="Weakness">Do you feel weakness ?</label>
+        <div class="col-sm-6">
+          <select class="form-control" id="Weakness" name="Weakness" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="Polyphagia">Do you feel extreme hungry ? (Polyphagia)</label>
+        <div class="col-sm-6">
+          <select class="form-control" id="Polyphagia" name="Polyphagia" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="GenitalThrush">Genital thrush ? </label>
+        <div class="col-sm-6">
+          <select class="form-control" id="GenitalThrush" name="GenitalThrush" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="VisualBlurring">Visual blurring ? </label>
+        <div class="col-sm-6">
+          <select class="form-control" id="VisualBlurring" name="VisualBlurring" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="Itching">Itching ? </label>
+        <div class="col-sm-6">
+          <select class="form-control" id="Itching" name="Itching" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="Irritability">Irritability ? </label>
+        <div class="col-sm-6">
+          <select class="form-control" id="Irritability" name="Irritability" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="DelayedHealing">Delayed healing ? </label>
+        <div class="col-sm-6">
+          <select class="form-control" id="DelayedHealing" name="DelayedHealing" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="PartialParesis">Partial paresis ? </label>
+        <div class="col-sm-6">
+          <select class="form-control" id="PartialParesis" name="PartialParesis" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="MuscleStiffness">Muscle stiffness ? </label>
+        <div class="col-sm-6">
+          <select class="form-control" id="MuscleStiffness" name="MuscleStiffness" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="Alopecia">Sudden hair loss ? (Alopecia)</label>
+        <div class="col-sm-6">
+          <select class="form-control" id="Alopecia" name="Alopecia" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="Obesity">Obesity ? </label>
+        <div class="col-sm-6">
+          <select class="form-control" id="Obesity" name="Obesity" required>
+            <option value="0">Please Select Option</option>
+            <option value="0"> No </option>
+            <option value="1"> YES </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-12 col-sm-12">
+          <button type="submit" class="btn btn-success col-sm-2 col-xs-12">Submit</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  </div>
+
+  <!---        form      -->
+
+
+
+</body>
+
+</html>
