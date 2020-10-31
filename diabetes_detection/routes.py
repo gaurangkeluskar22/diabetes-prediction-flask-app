@@ -22,7 +22,7 @@ def detect():
         diabetes_chance = model.predict_proba(X_test)[0][1] * 100
         
         #return jsonify({'diabetes_chance': diabetes_chance})
-        return render_template('index.html',predection_text='Diabetes chance: {}'.format(diabetes_chance))
+        return render_template('index.html',predection_text='Diabetes chance: {} %'.format(diabetes_chance))
     except:
         # return jsonify({'error': "Please provide valid data"})
         return render_template('index.html',predection_text='Please provide valid data')
